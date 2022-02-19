@@ -57,9 +57,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Services\Grid\IGridBuilderService.cs" />
+    <Compile Include="Assets\Scripts\Installers\FrameworkInstaller.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\RaycastService.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
-    <Compile Include="Assets\Scripts\Installers\FrameworkInstaller.cs" />
+    <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
+    <Compile Include="Assets\Scripts\Installers\ScriptableObjectsInstaller.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

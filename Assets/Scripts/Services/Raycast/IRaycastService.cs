@@ -9,6 +9,8 @@ namespace Assets.Scripts.Services.Raycast
 {
    public interface IRaycastService
    {
-      GameObject GetClickedGameObject();
+      GameObject GetClickedGameObject(Vector3 mousePosition, Camera camera);
+
+      Vector3 GetWorldPoint(Vector3 mousePosition, Camera camera);
    }
 }

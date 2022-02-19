@@ -11,11 +11,12 @@ public class InputManager : MonoBehaviour
 
    void Start()
    {
-      raycastService.GetClickedGameObject();
    }
 
    void Update()
    {
-
+      if(Input.GetMouseButtonDown(0)) {
+         raycastService.GetClickedGameObject(Input.mousePosition, Camera.main);
+      }
    }
 }
