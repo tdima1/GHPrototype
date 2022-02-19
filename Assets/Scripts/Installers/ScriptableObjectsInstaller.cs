@@ -5,9 +5,11 @@ using Zenject;
 public class ScriptableObjectsInstaller : ScriptableObjectInstaller<ScriptableObjectsInstaller>
 {
    public GridBuilderData gridBuilderData;
+   public PathfindingLayers pathfindingLayers;
 
    public override void InstallBindings()
    {
       Container.BindInterfacesAndSelfTo<GridBuilderData>().FromInstance(gridBuilderData).AsSingle();
+      Container.BindInterfacesAndSelfTo<PathfindingLayers>().FromInstance(pathfindingLayers).AsSingle();
    }
 }

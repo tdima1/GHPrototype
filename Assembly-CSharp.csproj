@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
     <Compile Include="Assets\Scripts\Installers\ScriptableObjectsInstaller.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

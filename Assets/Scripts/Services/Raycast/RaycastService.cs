@@ -11,7 +11,7 @@ namespace Assets.Scripts.Services.Raycast
 {
    internal class RaycastService : IRaycastService
    {
-      [Inject] private readonly GridBuilderData gridBuilderData;
+      [Inject] private readonly PathfindingLayers pathfindingLayers;
 
       public GameObject GetClickedGameObject(Vector3 mousePosition, Camera camera)
       {
@@ -22,8 +22,6 @@ namespace Assets.Scripts.Services.Raycast
          if(hitInfo.transform != null) {
             var hitObject = GetUpperMostParent(hitInfo);
 
-            Debug.Log(hitObject.name);
-
             return hitObject;
          }
 
@@ -32,17 +30,13 @@ namespace Assets.Scripts.Services.Raycast
 
       public Vector3 GetWorldPoint(Vector3 mousePosition, Camera camera)
       {
-         return Vector3.zero;
-         //var mouseWorldPosition = camera.ScreenPointToRay(mousePosition);
+         var mouseWorldPosition = camera.ScreenPointToRay(mousePosition);
 
-         //Physics.Raycast(mouseWorldPosition, out RaycastHit hitInfo, pathfindingLayers.GroundLayer);
+         Physics.Raycast(mouseWorldPosition, out RaycastHit hitInfo, pathfindingLayers.GroundLayer);
 
-         //var destination = new Vector3(
-         //   Mathf.RoundToInt(hitInfo.point.x / gridBuilderData.GridCellSize) * gridBuilderData.GridCellSize,
-         //   hitInfo.point.y,
-         //   Mathf.RoundToInt(hitInfo.point.z / gridBuilderData.GridCellSize) * gridBuilderData.GridCellSize);
+         var worldPoint = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
 
-         //return destination;
+         return worldPoint;
       }
 
       private GameObject GetUpperMostParent(RaycastHit hitInfo)

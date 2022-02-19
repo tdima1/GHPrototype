@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GridBuilderData
   m_EditorClassIdentifier: 
   GridRadius: 10
-  GridCellSize: 3
+  GridCellSize: 1

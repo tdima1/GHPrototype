@@ -16,7 +16,11 @@ public class InputManager : MonoBehaviour
    void Update()
    {
       if(Input.GetMouseButtonDown(0)) {
-         raycastService.GetClickedGameObject(Input.mousePosition, Camera.main);
+         var clickedObject = raycastService.GetClickedGameObject(Input.mousePosition, Camera.main);
+
+         var worldPoint = raycastService.GetWorldPoint(Input.mousePosition, Camera.main);
+
+         Debug.Log($"{worldPoint} - {clickedObject.name}");
       }
    }
 }
