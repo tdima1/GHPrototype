@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b39f34f7983b224893c30e73af7304a, type: 3}
-  m_Name: GridBuilderData
+  m_Script: {fileID: 11500000, guid: 6e5c52bba3f4b0540a3e6adcb584cbdd, type: 3}
+  m_Name: Directions
   m_EditorClassIdentifier: 
-  GridRadius: 2
-  CellSize: 1
+  Up: {x: 0, y: 0, z: 1}
+  Down: {x: 0, y: 0, z: -1}
+  Left: {x: -1, y: 0, z: 0}
+  Right: {x: 1, y: 0, z: 0}

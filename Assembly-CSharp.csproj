@@ -65,6 +65,12 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
     <Compile Include="Assets\Scripts\Installers\ScriptableObjectsInstaller.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
+    <Compile Include="Assets\Scripts\Services\Movement\MovementService.cs" />
+    <Compile Include="Assets\Scripts\Services\Movement\IMovementService.cs" />
+    <Compile Include="Assets\Scripts\Models\Grid.cs" />
+    <Compile Include="Assets\Scripts\Models\Cell.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\RaycastConstants.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

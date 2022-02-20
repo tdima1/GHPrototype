@@ -8,7 +8,7 @@ using UnityEngine;
 public class GridBuilderData : ScriptableObject
 {
    [Range(1, 50)]
-   public int GridRadius = 10;
+   public int GridRadius;
    [Range(1, 10)]
-   public int GridCellSize;
+   public int CellSize;
 }

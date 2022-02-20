@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b39f34f7983b224893c30e73af7304a, type: 3}
-  m_Name: GridBuilderData
+  m_Script: {fileID: 11500000, guid: fc50b0a247a048a4fbb77a0f47ab1a22, type: 3}
+  m_Name: RaycastConstants
   m_EditorClassIdentifier: 
-  GridRadius: 2
-  CellSize: 1
+  RayHeight: 100
+  RayLength: 150

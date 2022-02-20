@@ -6,10 +6,14 @@ public class ScriptableObjectsInstaller : ScriptableObjectInstaller<ScriptableOb
 {
    public GridBuilderData gridBuilderData;
    public PathfindingLayers pathfindingLayers;
+   public RaycastConstants raycastConstants;
+   public Directions directions;
 
    public override void InstallBindings()
    {
       Container.BindInterfacesAndSelfTo<GridBuilderData>().FromInstance(gridBuilderData).AsSingle();
       Container.BindInterfacesAndSelfTo<PathfindingLayers>().FromInstance(pathfindingLayers).AsSingle();
+      Container.BindInterfacesAndSelfTo<RaycastConstants>().FromInstance(raycastConstants).AsSingle();
+      Container.BindInterfacesAndSelfTo<Directions>().FromInstance(directions).AsSingle();
    }
 }
