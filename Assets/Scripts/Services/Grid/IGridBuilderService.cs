@@ -10,6 +10,6 @@ namespace Assets.Scripts.Services.Grid
 {
    public interface IGridBuilderService
    {
-      Grid<Cell> BuildGrid(Vector3 origin);
+      Grid<Cell> BuildGrid(Vector3Int origin);
    }
 }

@@ -8,6 +8,7 @@ namespace Assets.Scripts.Models
       public readonly int CellSize;
       public readonly int GridWidth;
       public readonly int GridRadius;
+
       public Dictionary<(int, int), TGridObject> Cells;
 
       public Grid(int gridRadius, int cellSize)
@@ -18,24 +19,24 @@ namespace Assets.Scripts.Models
          Cells = new Dictionary<(int, int), TGridObject>();
       }
 
-      public TGridObject GetElementAtGridPosition(int x, int y)
+      public TGridObject GetCell(int x, int z)
       {
-         if(x < GridWidth && y < GridWidth && x >= 0 && y >= 0 && Cells.ContainsKey((x,y))) {
-            return Cells[(x, y)];
+         if(Cells.ContainsKey((x,z))) {
+            return Cells[(x, z)];
          } else {
             return default;
          }
       }
 
-      public void SetElementAtGridPosition(int x, int y, TGridObject value)
+      public void SetElementAtGridPosition(int x, int z, TGridObject value)
       {
-         if(x < GridWidth && y < GridWidth && x >= 0 && y >= 0) {
-            Cells[(x, y)] = value;
+         if(x < GridWidth && z < GridWidth && x >= 0 && z >= 0) {
+            Cells[(x, z)] = value;
          }
       }
       public void SetElementAtGridPosition(Vector3Int cellGridPosition, TGridObject value)
       {
-         if(cellGridPosition.x < GridWidth && cellGridPosition.z < GridWidth && cellGridPosition.x >= 0 && cellGridPosition.z >= 0) {
+         if(!Cells.ContainsKey((cellGridPosition.x, cellGridPosition.z))) {
             Cells[(cellGridPosition.x, cellGridPosition.z)] = value;
          }
       }

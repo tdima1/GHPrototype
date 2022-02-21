@@ -55,22 +55,25 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Installers\ScriptableObjectsInstaller.cs" />
+    <Compile Include="Assets\Scripts\Models\Grid.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Services\Movement\IMovementService.cs" />
+    <Compile Include="Assets\Scripts\Services\Pathfinding\IPathfindingService.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\RaycastConstants.cs" />
+    <Compile Include="Assets\Scripts\Services\Pathfinding\PathfindingService.cs" />
+    <Compile Include="Assets\Scripts\Models\Cell.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Services\Grid\IGridBuilderService.cs" />
     <Compile Include="Assets\Scripts\Installers\FrameworkInstaller.cs" />
+    <Compile Include="Assets\Scripts\Services\Movement\MovementService.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\RaycastService.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
     <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
-    <Compile Include="Assets\Scripts\Installers\ScriptableObjectsInstaller.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
-    <Compile Include="Assets\Scripts\Services\Movement\MovementService.cs" />
-    <Compile Include="Assets\Scripts\Services\Movement\IMovementService.cs" />
-    <Compile Include="Assets\Scripts\Models\Grid.cs" />
-    <Compile Include="Assets\Scripts\Models\Cell.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\RaycastConstants.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
+    <Compile Include="Assets\Scripts\Models\PathfindingData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
