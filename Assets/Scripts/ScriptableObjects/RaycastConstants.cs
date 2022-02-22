@@ -6,5 +6,5 @@ using UnityEngine;
 public class RaycastConstants : ScriptableObject
 {
    [Range(100, 500)] public int RayHeight;
-   [Range(150, 550)] public int RayLength;
+   [Range(100, 500)] public int RayLength;
 }

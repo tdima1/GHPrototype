@@ -83,10 +83,10 @@ namespace Assets.Scripts.Services.Movement
       {
          foreach(var position in path) {
 
-            if(path[0] == position) {
-               //unit.position += (cell.WorldPosition - unit.position).normalized * (cell.WorldPosition - unit.position).magnitude;
-               continue;
-            }
+            //if(path[0] == position) {
+            //   unit.position += (position - unit.position).normalized * (position - unit.position).magnitude;
+            //   continue;
+            //}
 
             var movementThisFrame = 5 * Time.deltaTime;
 

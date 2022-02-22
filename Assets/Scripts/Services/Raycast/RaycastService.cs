@@ -31,8 +31,9 @@ namespace Assets.Scripts.Services.Raycast
 
       public (bool ObjectHit, Vector3 GroundPosition) GetGroundPoint(Vector3 origin)
       {
-         Vector3 raySourcePosition = origin + Vector3.up * raycastConstants.RayHeight;
-         var hit = Physics.Raycast(raySourcePosition, Vector3.down, out RaycastHit hitInfo, raycastConstants.RayLength, pathfindingLayers.GroundLayer | pathfindingLayers.GroundLayer);
+         var originToInt = Vector3Int.RoundToInt(origin);
+         Vector3 raySourcePosition = originToInt + Vector3.up * raycastConstants.RayHeight;
+         var hit = Physics.Raycast(raySourcePosition, Vector3.down, out RaycastHit hitInfo, raycastConstants.RayLength, pathfindingLayers.GroundLayer);
 
          return (hit, hitInfo.point);
       }

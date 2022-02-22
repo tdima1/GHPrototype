@@ -18,7 +18,7 @@ public class InputManager : MonoBehaviour
 
    void Update()
    {
-      if(Input.GetMouseButton(0)) {
+      if(Input.GetMouseButtonDown(0)) {
 
          var hitData = raycastService.GetWorldPoint(Input.mousePosition, Camera.main);
 

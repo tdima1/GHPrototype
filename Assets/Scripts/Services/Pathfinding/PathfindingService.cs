@@ -70,10 +70,11 @@ namespace Assets.Scripts.Services.Pathfinding
       {
          var result = new List<Vector3>();
          var currentCell = endCell;
-         result.Add(currentCell.WorldPosition + Vector3.up * currentCell.Height);
+         result.Add(new Vector3(currentCell.WorldPosition.x, currentCell.Height, currentCell.WorldPosition.z));
 
          while(currentCell.previousCell != null) {
-            result.Add(currentCell.previousCell.WorldPosition + Vector3.up * currentCell.previousCell.Height);
+            var pos = new Vector3(currentCell.previousCell.WorldPosition.x, currentCell.previousCell.Height, currentCell.previousCell.WorldPosition.z);
+            result.Add(pos);
 
             currentCell = currentCell.previousCell;
          }

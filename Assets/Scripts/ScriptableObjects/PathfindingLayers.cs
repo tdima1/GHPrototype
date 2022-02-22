@@ -6,4 +6,6 @@ using UnityEngine;
 public class PathfindingLayers : ScriptableObject
 {
    public LayerMask GroundLayer;
+   public LayerMask EntityLayer;
+   public LayerMask ObstacleLayer;
 }

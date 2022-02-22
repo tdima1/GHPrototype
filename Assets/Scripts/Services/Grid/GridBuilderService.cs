@@ -30,8 +30,8 @@ namespace Assets.Scripts.Services.Grid
          for(int i = 0; i <= grid.GridWidth / 2; i++) {
             for(int j = grid.GridWidth / 2 - i; j <= grid.GridWidth / 2 + i; j++) {
 
-               var cell = BuildGridCell(new Vector3(origin.x + (i - grid.GridRadius), origin.y, origin.z + (j - grid.GridRadius)));
-               var symCell = BuildGridCell(new Vector3(origin.x + ((grid.GridWidth - i - 1) - grid.GridRadius), origin.y, origin.z + (j - grid.GridRadius)));
+               var cell = BuildGridCell(new Vector3(origin.x + (i - grid.GridRadius), 0, origin.z + (j - grid.GridRadius)));
+               var symCell = BuildGridCell(new Vector3(origin.x + ((grid.GridWidth - i - 1) - grid.GridRadius), 0, origin.z + (j - grid.GridRadius)));
 
                if (cell != null)
                   grid.SetElementAtGridPosition(cell.WorldPosition, cell);

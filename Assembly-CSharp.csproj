@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Services\Grid\IGridBuilderService.cs" />
     <Compile Include="Assets\Scripts\Installers\FrameworkInstaller.cs" />
     <Compile Include="Assets\Scripts\Services\Movement\MovementService.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UnitController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\RaycastService.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
@@ -74,9 +75,10 @@
     <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
     <Compile Include="Assets\Scripts\Models\PathfindingData.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
-    <Compile Include="Assets\Scripts\Controllers\UnitController.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\SimpleLowPolyNature\Readme.txt" />
+     <None Include="Assets\SimpleLowPolyNature\Shaders\SimpleWater.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.2f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
