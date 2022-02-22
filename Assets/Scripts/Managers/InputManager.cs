@@ -18,14 +18,15 @@ public class InputManager : MonoBehaviour
 
    void Update()
    {
-      if(Input.GetMouseButtonDown(0)) {
-         var clickedObject = raycastService.GetClickedGameObject(Input.mousePosition, Camera.main);
+      if(Input.GetMouseButton(0)) {
 
-         var worldPoint = raycastService.GetWorldPoint(Input.mousePosition, Camera.main);
+         var hitData = raycastService.GetWorldPoint(Input.mousePosition, Camera.main);
 
-         movementService.MoveUnit(playerPrefab, worldPoint);
+         if(hitData.ObjectHit) {
+            movementService.MoveUnit(playerPrefab, hitData.WorldPosition);
+         }
 
-         Debug.Log($"{worldPoint} - {clickedObject.name}");
+         Debug.Log($"{hitData}");
       }
    }
 }

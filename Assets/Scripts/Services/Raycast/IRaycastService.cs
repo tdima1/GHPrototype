@@ -11,8 +11,8 @@ namespace Assets.Scripts.Services.Raycast
    {
       GameObject GetClickedGameObject(Vector3 mousePosition, Camera camera);
 
-      Vector3 GetWorldPoint(Vector3 mousePosition, Camera camera);
+      (bool ObjectHit, Vector3 GroundPosition) GetGroundPoint(Vector3 origin);
 
-      (bool ObjectHit, Vector3 WorldPosition) GetGroundPoint(Vector3 origin);
+      (bool ObjectHit, Vector3 WorldPosition) GetWorldPoint(Vector3 mousePosition, Camera camera);
    }
 }

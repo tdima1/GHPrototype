@@ -72,8 +72,9 @@
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
     <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
     <Compile Include="Assets\Scripts\Models\PathfindingData.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UnitController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

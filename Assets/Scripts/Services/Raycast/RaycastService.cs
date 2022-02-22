@@ -29,7 +29,7 @@ namespace Assets.Scripts.Services.Raycast
          return null;
       }
 
-      public (bool ObjectHit, Vector3 WorldPosition) GetGroundPoint(Vector3 origin)
+      public (bool ObjectHit, Vector3 GroundPosition) GetGroundPoint(Vector3 origin)
       {
          Vector3 raySourcePosition = origin + Vector3.up * raycastConstants.RayHeight;
          var hit = Physics.Raycast(raySourcePosition, Vector3.down, out RaycastHit hitInfo, raycastConstants.RayLength, pathfindingLayers.GroundLayer | pathfindingLayers.GroundLayer);
@@ -37,13 +37,13 @@ namespace Assets.Scripts.Services.Raycast
          return (hit, hitInfo.point);
       }
 
-      public Vector3 GetWorldPoint(Vector3 mousePosition, Camera camera)
+      public (bool ObjectHit, Vector3 WorldPosition) GetWorldPoint(Vector3 mousePosition, Camera camera)
       {
          var mouseRayFromScreenToWorld = camera.ScreenPointToRay(mousePosition);
-         Physics.Raycast(mouseRayFromScreenToWorld, out RaycastHit hitInfo);
+         var hit = Physics.Raycast(mouseRayFromScreenToWorld, out RaycastHit hitInfo);
 
          var worldPoint = new Vector3(hitInfo.point.x, hitInfo.point.y, hitInfo.point.z);
-         return worldPoint;
+         return (hit, worldPoint);
       }
 
       private GameObject GetUpperMostParent(RaycastHit hitInfo)

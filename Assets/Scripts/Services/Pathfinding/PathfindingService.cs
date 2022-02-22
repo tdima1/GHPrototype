@@ -47,7 +47,6 @@ namespace Assets.Scripts.Services.Pathfinding
          if(endpointsValid) {
             PathfindingData data = Initialize(start, destination, grid, useDiagonals);
 
-            // algorith
             while(data.OpenSet.Count > 0) {
 
                Cell currentCell = GetLowestFCostNode(data.OpenSet);
@@ -74,7 +73,7 @@ namespace Assets.Scripts.Services.Pathfinding
          result.Add(currentCell.WorldPosition + Vector3.up * currentCell.Height);
 
          while(currentCell.previousCell != null) {
-            result.Add(currentCell.previousCell.WorldPosition + Vector3.up * currentCell.Height);
+            result.Add(currentCell.previousCell.WorldPosition + Vector3.up * currentCell.previousCell.Height);
 
             currentCell = currentCell.previousCell;
          }

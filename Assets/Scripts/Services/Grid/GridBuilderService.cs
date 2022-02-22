@@ -50,8 +50,8 @@ namespace Assets.Scripts.Services.Grid
          var result = raycastService.GetGroundPoint(cellOrigin);
 
          if(result.ObjectHit) {
-            cell.Height = result.WorldPosition.y;
-            cell.WorldPosition = Vector3Int.RoundToInt(result.WorldPosition);
+            cell.Height = result.GroundPosition.y;
+            cell.WorldPosition = Vector3Int.RoundToInt(result.GroundPosition);
             return cell;
          }
 

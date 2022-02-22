@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Services.Grid;
 using Assets.Scripts.Services.Pathfinding;
 using Assets.Scripts.Services.Raycast;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,35 +15,87 @@ namespace Assets.Scripts.Services.Movement
    {
       private readonly IGridBuilderService gridBuilderService;
       private readonly IPathfindingService pathfindingService;
-      private readonly GridBuilderData gridBuilderData;
       private GameObject cellPrefab;
+      private List<GameObject> worldCells = new List<GameObject>();
+
+      private IEnumerator movementCoroutine;
 
       public MovementService(
          IGridBuilderService gridBuilderService,
-         IPathfindingService pathfindingService,
-         GridBuilderData gridBuilderData)
+         IPathfindingService pathfindingService)
       {
          this.gridBuilderService = gridBuilderService;
          this.pathfindingService = pathfindingService;
-         this.gridBuilderData = gridBuilderData;
          cellPrefab = GameObject.FindGameObjectWithTag("cell");
       }
 
       public void MoveUnit(Transform unit, Vector3 destination)
       {
+         List<Vector3> path = GetPath(unit, destination);
+
+         MoveUnit(unit, path);
+
+         Debug_PlacePathCells(path);
+      }
+
+      private List<Vector3> GetPath(Transform unit, Vector3 destination)
+      {
+         //todo fix bug
          var unitPositionToInt = Vector3Int.RoundToInt(unit.position);
          var destinationToInt = Vector3Int.RoundToInt(destination);
 
          var movementGrid = gridBuilderService.BuildGrid(unitPositionToInt);
 
          var path = pathfindingService.GetPath(unitPositionToInt, destinationToInt, movementGrid);
+         return path;
+      }
+
+      private void MoveUnit(Transform unit, List<Vector3> path)
+      {
+         var unitController = unit.GetComponent<UnitController>();
+
+         if(movementCoroutine != null) {
+            unitController.StopAllCoroutines();
+         }
+
+         movementCoroutine = MoveUnitThroughPath(unit, path);
+
+         unitController.StartCoroutine(movementCoroutine);
+      }
+
+      private void Debug_PlacePathCells(List<Vector3> path)
+      {
+         foreach(var cell in worldCells) {
+            Object.Destroy(cell);
+         }
+         worldCells.Clear();
 
          foreach(var cell in path) {
             GameObject worldCell = cellPrefab;
             worldCell.transform.position = cell + new Vector3(0, 0.01f, 0);
-            worldCell.transform.localScale = movementGrid.CellSize * new Vector3(0.95f, 0.95f, 1);
+            worldCell.transform.localScale = new Vector3(0.95f, 0.95f, 1);
 
-            Object.Instantiate(worldCell, GameObject.FindGameObjectWithTag("Grid").transform);
+            worldCells.Add(Object.Instantiate(worldCell, GameObject.FindGameObjectWithTag("Grid").transform));
+         }
+      }
+
+      private IEnumerator MoveUnitThroughPath(Transform unit, List<Vector3> path)
+      {
+         foreach(var position in path) {
+
+            if(path[0] == position) {
+               //unit.position += (cell.WorldPosition - unit.position).normalized * (cell.WorldPosition - unit.position).magnitude;
+               continue;
+            }
+
+            var movementThisFrame = 5 * Time.deltaTime;
+
+            while((position - unit.position).magnitude > movementThisFrame) {
+
+               unit.position += (position - unit.position).normalized * movementThisFrame;
+
+               yield return new WaitForEndOfFrame();
+            }
          }
       }
    }
