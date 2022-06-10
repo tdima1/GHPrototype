@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4c1e41644eb9e4ea831a40016cd82e, type: 3}
   m_Name: CollisionConstants
   m_EditorClassIdentifier: 
-  Height: 0
-  Radius: 0
+  Height: 1.5
+  Radius: 0.49

@@ -13,7 +13,7 @@ namespace Assets.Scripts.Services.Raycast
    {
       [Inject] private readonly PathfindingLayers pathfindingLayers;
       [Inject] private readonly RaycastConstants raycastConstants;
-      [Inject] private readonly CollisionConstants playerModelData;
+      [Inject] private readonly CollisionConstants collisionConstants;
 
       public GameObject GetClickedGameObject(Vector3 mousePosition, Camera camera)
       {
@@ -37,7 +37,7 @@ namespace Assets.Scripts.Services.Raycast
          var hit = Physics.Raycast(raySourcePosition, Vector3.down, out RaycastHit hitInfo, raycastConstants.RayLength, pathfindingLayers.GroundLayer);
 
          if(hit) {
-            bool collision = Physics.CheckCapsule(hitInfo.point, hitInfo.point + Vector3.up * 1.5f, 0.5f, pathfindingLayers.ObstacleLayer);
+            bool collision = Physics.CheckCapsule(hitInfo.point, hitInfo.point + Vector3.up * collisionConstants.Height, collisionConstants.Radius, pathfindingLayers.ObstacleLayer);
 
             if(collision) {
                hit = false;

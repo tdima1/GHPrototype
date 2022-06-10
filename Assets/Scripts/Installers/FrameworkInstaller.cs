@@ -1,3 +1,4 @@
+using Assets.Scripts.Services.Entities;
 using Assets.Scripts.Services.Grid;
 using Assets.Scripts.Services.Movement;
 using Assets.Scripts.Services.Pathfinding;
@@ -13,5 +14,6 @@ public class FrameworkInstaller : MonoInstaller
       Container.Bind<IMovementService>().To<MovementService>().AsSingle();
       Container.Bind<IGridBuilderService>().To<GridBuilderService>().AsSingle();
       Container.Bind<IPathfindingService>().To<PathfindingService>().AsSingle();
+      Container.Bind<IEntitySpawnerService>().To<EntitySpawnerService>().AsSingle();
    }
 }
