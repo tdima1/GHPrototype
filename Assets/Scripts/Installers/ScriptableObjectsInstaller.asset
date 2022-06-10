@@ -16,3 +16,4 @@ MonoBehaviour:
   pathfindingLayers: {fileID: 11400000, guid: aa8abbd411f59074e8d60e6814add5f1, type: 2}
   raycastConstants: {fileID: 11400000, guid: c412ee310f88278439a05c1b2495020b, type: 2}
   directions: {fileID: 11400000, guid: d97074910fcd1fd4fb1607c00b0801bd, type: 2}
+  playerModelData: {fileID: 11400000, guid: ed63d744b9107a84b9cc8047ac290248, type: 2}

@@ -7,7 +7,8 @@ public class CameraController : MonoBehaviour
    [SerializeField] private float movementTime;
    [SerializeField] private float zoomAmount;
    [SerializeField] private float rotateAmount;
-   [SerializeField] private float offsetFromTarget;
+   [SerializeField][Range(0, 0.003f)] private float smoothSpeed;
+   public Vector3 cameraOffset;
 
    [SerializeField] private Transform cameraTransform;
    [SerializeField] private Transform target;
@@ -21,6 +22,11 @@ public class CameraController : MonoBehaviour
    {
       newRotation = transform.rotation;
       newZoom = cameraTransform.localPosition;
+   }
+
+   private void FixedUpdate()
+   {
+      HandleCameraMovement();
    }
 
    private void LateUpdate()
@@ -65,7 +71,9 @@ public class CameraController : MonoBehaviour
 
    private void HandleCameraMovement()
    {
-      transform.position = new Vector3(target.position.x, target.position.y + offsetFromTarget, target.position.z);
+      var newPosition = new Vector3(target.position.x + cameraOffset.x, target.position.y + cameraOffset.y, target.position.z + cameraOffset.z);
+      var smoothPosition = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+      transform.position = smoothPosition;
    }
 
    private bool IsCursorInScreen()

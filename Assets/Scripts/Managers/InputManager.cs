@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
    {
       if(Input.GetMouseButtonDown(0)) {
 
-         var hitData = raycastService.GetWorldPoint(Input.mousePosition, Camera.main);
+         var hitData = raycastService.GetWorldGroundPoint(Input.mousePosition, Camera.main);
 
          if(hitData.ObjectHit) {
             movementService.MoveUnit(playerPrefab, hitData.WorldPosition);

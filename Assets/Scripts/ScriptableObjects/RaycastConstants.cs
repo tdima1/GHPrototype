@@ -7,4 +7,5 @@ public class RaycastConstants : ScriptableObject
 {
    [Range(100, 500)] public int RayHeight;
    [Range(100, 500)] public int RayLength;
+   [Range(100, 500)] public int RayCameraToGroundLength;
 }

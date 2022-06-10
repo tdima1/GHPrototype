@@ -33,14 +33,15 @@ namespace Assets.Scripts.Services.Movement
       {
          List<Vector3> path = GetPath(unit, destination);
 
-         MoveUnit(unit, path);
+         if (path != null) {
+            MoveUnit(unit, path);
 
-         Debug_PlacePathCells(path);
+            Debug_PlacePathCells(path);
+         }
       }
 
       private List<Vector3> GetPath(Transform unit, Vector3 destination)
       {
-         //todo fix bug
          var unitPositionToInt = Vector3Int.RoundToInt(unit.position);
          var destinationToInt = Vector3Int.RoundToInt(destination);
 
@@ -55,7 +56,7 @@ namespace Assets.Scripts.Services.Movement
          var unitController = unit.GetComponent<UnitController>();
 
          if(movementCoroutine != null) {
-            unitController.StopAllCoroutines();
+            unitController.StopCoroutine(movementCoroutine);
          }
 
          movementCoroutine = MoveUnitThroughPath(unit, path);
@@ -82,13 +83,12 @@ namespace Assets.Scripts.Services.Movement
       private IEnumerator MoveUnitThroughPath(Transform unit, List<Vector3> path)
       {
          foreach(var position in path) {
-
             //if(path[0] == position) {
             //   unit.position += (position - unit.position).normalized * (position - unit.position).magnitude;
             //   continue;
             //}
 
-            var movementThisFrame = 5 * Time.deltaTime;
+            var movementThisFrame = 7.5f * Time.deltaTime;
 
             while((position - unit.position).magnitude > movementThisFrame) {
 

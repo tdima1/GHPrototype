@@ -13,6 +13,6 @@ namespace Assets.Scripts.Services.Raycast
 
       (bool ObjectHit, Vector3 GroundPosition) GetGroundPoint(Vector3 origin);
 
-      (bool ObjectHit, Vector3 WorldPosition) GetWorldPoint(Vector3 mousePosition, Camera camera);
+      (bool ObjectHit, Vector3 WorldPosition) GetWorldGroundPoint(Vector3 mousePosition, Camera camera);
    }
 }
