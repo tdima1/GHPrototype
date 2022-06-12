@@ -27,25 +27,29 @@ namespace Assets.Scripts.Services.Entities
          this.enemyFactory = enemyFactory;
       }
 
-      public List<Transform> SpawnEntitiesAroundSource(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource, Transform parent)
+      public List<Transform> SpawnEntitiesAroundSource(Vector3 spawnPosition, int numberOfSpawns, int wanderingDistance, Transform spawnPoint)
       {
-         var spawnLocations = GenerateRandomSpawnLocations(sourcePosition, numberOfSpawns, distanceFromSource);
+         var spawnLocations = GenerateRandomSpawnLocations(spawnPosition, numberOfSpawns, wanderingDistance);
          var enemies = new List<Transform>();
 
          foreach(var location in spawnLocations) {
-            var enemy = SpawnEntity(parent, location);
+            var enemy = SpawnEntity(spawnPoint, location, wanderingDistance);
             enemies.Add(enemy);
          }
 
          return enemies;
       }
 
-      public Transform SpawnEntity(Transform parent, Vector3 spawnPoint)
+      public Transform SpawnEntity(Transform spawnPoint, Vector3 spawnPosition, int wanderingDistance)
       {
          var enemy = enemyFactory.Create(movementService);
 
-         enemy.transform.position = spawnPoint;
-         enemy.transform.parent = parent;
+         enemy.transform.position = spawnPosition;
+         enemy.transform.parent = spawnPoint;
+
+         enemy.WanderingDistance = wanderingDistance;
+         enemy.SpawnPoint = spawnPoint;
+
          return enemy.transform;
       }
 

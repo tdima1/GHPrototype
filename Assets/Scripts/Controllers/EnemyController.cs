@@ -8,6 +8,7 @@ namespace Assets.Scripts.Controllers
    public class EnemyController : UnitController
    {
       public Transform SpawnPoint;
+      public int WanderingDistance;
 
       private IMovementService movementService;
 
@@ -33,7 +34,12 @@ namespace Assets.Scripts.Controllers
 
             remainingTime = Random.Range(1, 10);
 
-            movementService.MoveUnit(transform, Vector3.zero);
+            var detination = new Vector3(
+               SpawnPoint.position.x + Random.Range(-WanderingDistance, WanderingDistance),
+               SpawnPoint.position.y,
+               SpawnPoint.position.z + Random.Range(-WanderingDistance, WanderingDistance));
+
+            movementService.MoveUnit(transform, detination);
          }
       }
    }

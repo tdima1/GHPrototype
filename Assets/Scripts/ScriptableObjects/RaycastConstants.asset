@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RaycastConstants
   m_EditorClassIdentifier: 
   RayHeight: 100
-  RayLength: 100
+  RayLength: 200
   RayCameraToGroundLength: 500
