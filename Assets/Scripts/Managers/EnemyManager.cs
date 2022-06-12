@@ -17,9 +17,8 @@ namespace Assets.Scripts.Managers
       [SerializeField] private Transform enemyParent;
       [SerializeField] private List<Transform> spawnPointsPrefabs;
 
-      [SerializeField] [Range(1, 20)] private int maxSpawnsPerMap;
-      [SerializeField][Range(1,10)] private int maxSpawnsPerSpawnPoint;
-      [SerializeField] [Range(1, 3)] private int maxSpawnCounterPerSpawn;
+      [SerializeField][Range(1,10)] private int maxEnemiesPerSpawnPoint;
+      [SerializeField] [Range(1, 3)] private int maxEnemiesSpawnedAtOnce;
 
       [SerializeField] [Range(1, 10)] private int spawnPointMinTimeBetweenSpawns;
       [SerializeField] [Range(1, 30)] private int spawnPointMaxTimeBetweenSpawns;
@@ -31,7 +30,6 @@ namespace Assets.Scripts.Managers
       private void Start()
       {
          spawnPoints = new List<SpawnPoint>();
-         maxSpawnsPerMap = Mathf.Clamp(maxSpawnsPerMap, maxSpawnsPerSpawnPoint, maxSpawnsPerSpawnPoint * spawnPointsPrefabs.Count);
 
          foreach (var prefab in spawnPointsPrefabs) {
             var spawnPoint = new SpawnPoint() {
@@ -47,7 +45,7 @@ namespace Assets.Scripts.Managers
 
       private void Update()
       {
-         var availableSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxSpawnsPerSpawnPoint).ToList();
+         var availableSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxEnemiesPerSpawnPoint).ToList();
 
          foreach(var spawnPoint in availableSpawnPoints) {
             spawnPoint.TimeUntilNextSpawn -= Time.deltaTime;
@@ -56,7 +54,7 @@ namespace Assets.Scripts.Managers
 
                spawnPoint.TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns);
 
-               int numberOfEnemiesToSpawn = Random.Range(1, maxSpawnCounterPerSpawn);
+               int numberOfEnemiesToSpawn = Random.Range(1, maxEnemiesSpawnedAtOnce);
 
                var enemies = entitySpawnerService.SpawnEntitiesAroundSource(spawnPoint.SpawnPointTransform, numberOfEnemiesToSpawn, wanderingDistance);
 

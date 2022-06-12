@@ -1362,12 +1362,11 @@ MonoBehaviour:
   - {fileID: 1710501069}
   - {fileID: 507006594}
   - {fileID: 1456706695}
-  maxSpawnsPerMap: 20
-  maxSpawnsPerSpawnPoint: 5
-  maxSpawnCounterPerSpawn: 2
-  spawnPointMinTimeBetweenSpawns: 1
-  spawnPointMaxTimeBetweenSpawns: 3
-  wanderingDistance: 4
+  maxEnemiesPerSpawnPoint: 3
+  maxEnemiesSpawnedAtOnce: 2
+  spawnPointMinTimeBetweenSpawns: 2
+  spawnPointMaxTimeBetweenSpawns: 12
+  wanderingDistance: 5
 --- !u!1 &636171471
 GameObject:
   m_ObjectHideFlags: 0
