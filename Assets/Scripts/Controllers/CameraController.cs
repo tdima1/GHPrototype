@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
    [SerializeField] private float movementTime;
    [SerializeField] private float zoomAmount;
    [SerializeField] private float rotateAmount;
-   [SerializeField][Range(0, 0.003f)] private float smoothSpeed;
+   [SerializeField][Range(0, 11.003f)] private float smoothSpeed;
    public Vector3 cameraOffset;
 
    [SerializeField] private Transform cameraTransform;
@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
    private Quaternion newRotation;
    private Vector3 rotateStartPosition;
    private Vector3 rotateCurrentPosition;
+   private Vector3 velocity = Vector3.zero;
 
    private void Awake()
    {
@@ -26,11 +27,11 @@ public class CameraController : MonoBehaviour
 
    private void FixedUpdate()
    {
-      HandleCameraMovement();
    }
 
    private void LateUpdate()
    {
+      HandleCameraMovement();
       HandleCameraMovement();
       HandleCameraRotation();
       newZoom += HandleCameraZoom();
@@ -72,7 +73,7 @@ public class CameraController : MonoBehaviour
    private void HandleCameraMovement()
    {
       var newPosition = new Vector3(target.position.x + cameraOffset.x, target.position.y + cameraOffset.y, target.position.z + cameraOffset.z);
-      var smoothPosition = Vector3.Lerp(transform.position, newPosition, smoothSpeed);
+      var smoothPosition = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothSpeed);
       transform.position = smoothPosition;
    }
 

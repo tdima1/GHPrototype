@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Services.Movement;
 using Assets.Scripts.Services.Raycast;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 

@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\RaycastConstants.cs" />
     <Compile Include="Assets\Scripts\Services\Pathfinding\PathfindingService.cs" />
     <Compile Include="Assets\Scripts\Models\Cell.cs" />
+    <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Services\Grid\IGridBuilderService.cs" />
     <Compile Include="Assets\Scripts\Installers\FrameworkInstaller.cs" />
@@ -71,14 +72,15 @@
     <Compile Include="Assets\Scripts\Controllers\UnitController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\RaycastService.cs" />
+    <Compile Include="Assets\Scripts\Services\Entities\EntitySpawnerService.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
+    <Compile Include="Assets\Scripts\Controllers\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Services\Grid\GridBuilderService.cs" />
     <Compile Include="Assets\Scripts\Models\PathfindingData.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
-    <Compile Include="Assets\Scripts\Services\Entities\EntitySpawnerService.cs" />
     <Compile Include="Assets\Scripts\Services\Entities\IEntitySpawnerService.cs" />
-    <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
+    <Compile Include="Assets\Scripts\Factories\EnemyFactory.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimpleLowPolyNature\Readme.txt" />

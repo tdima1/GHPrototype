@@ -1,34 +1,36 @@
-﻿using Assets.Scripts.Services.Raycast;
+﻿using Assets.Scripts.Controllers;
+using Assets.Scripts.Factories;
+using Assets.Scripts.Services.Movement;
+using Assets.Scripts.Services.Raycast;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Services.Entities
 {
    internal class EntitySpawnerService : IEntitySpawnerService
    {
       private readonly IRaycastService raycastService;
-      private readonly RaycastConstants raycastConstants;
+      private readonly IMovementService movementService;
+      private readonly EnemyFactory enemyFactory;
 
       public EntitySpawnerService(
          IRaycastService raycastService,
-         RaycastConstants raycastConstants)
+         IMovementService movementService,
+         EnemyFactory enemyFactory)
       {
          this.raycastService = raycastService;
-         this.raycastConstants = raycastConstants;
+         this.movementService = movementService;
+         this.enemyFactory = enemyFactory;
       }
 
-      public Transform SpawnEntity(Transform entity, Transform parent, Vector3 spawnPosition)
+      public List<Transform> SpawnSingularEntitiesAroundSource(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource, Transform entity, Transform parent)
       {
-         return GameObject.Instantiate(entity, spawnPosition, Quaternion.identity, parent).transform;
-      }
-
-      public List<Transform> SpawnEntitiesAroundSource(Vector3 sourcePosition, Transform entity, Transform parent)
-      {
-         var spawnLocations = GenerateRandomSpawnLocations(sourcePosition);
+         var spawnLocations = GenerateRandomSpawnLocations(sourcePosition, numberOfSpawns, distanceFromSource);
          var enemies = new List<Transform>();
 
          foreach(var location in spawnLocations) {
@@ -39,18 +41,27 @@ namespace Assets.Scripts.Services.Entities
          return enemies;
       }
 
+      public Transform SpawnEntity(Transform entity, Transform parent, Vector3 spawnPoint)
+      {
+         var enemy = enemyFactory.Create(movementService);
+
+         enemy.transform.position = spawnPoint;
+         enemy.transform.parent = parent;
+         return enemy.transform;
+      }
+
       public void DespawnEntity(Transform entity)
       {
          GameObject.Destroy(entity);
       }
 
-      private List<Vector3> GenerateRandomSpawnLocations(Vector3 sourcePosition)
+      private List<Vector3> GenerateRandomSpawnLocations(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource)
       {
          var spawnLocations = new List<Vector3>();
 
-         for(int i = 0; i < 10; i++) {
-            var randX = UnityEngine.Random.Range(sourcePosition.x - 10, sourcePosition.x + 10);
-            var randZ = UnityEngine.Random.Range(sourcePosition.z - 10, sourcePosition.z + 10);
+         for(int i = 0; i < numberOfSpawns; i++) {
+            var randX = UnityEngine.Random.Range(sourcePosition.x - distanceFromSource, sourcePosition.x + distanceFromSource);
+            var randZ = UnityEngine.Random.Range(sourcePosition.z - distanceFromSource, sourcePosition.z + distanceFromSource);
 
             var groundHit = raycastService.GetGroundPoint(new Vector3(randX, 0, randZ));
 
