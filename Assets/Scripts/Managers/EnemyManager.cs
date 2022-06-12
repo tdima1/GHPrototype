@@ -38,7 +38,8 @@ namespace Assets.Scripts.Managers
                Entities = new List<Transform>(),
                EntitiesSpawned = 0,
                SpawnPointTransform = prefab,
-            };
+               TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns),
+         };
 
             spawnPoints.Add(spawnPoint);
          }
@@ -46,26 +47,23 @@ namespace Assets.Scripts.Managers
 
       private void Update()
       {
-         foreach (var spawnPoint in spawnPoints) {
+         var availableSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxSpawnsPerSpawnPoint).ToList();
+
+         foreach(var spawnPoint in availableSpawnPoints) {
             spawnPoint.TimeUntilNextSpawn -= Time.deltaTime;
-         }
 
-         var availableSpawnPoints = spawnPoints.Where(s => s.TimeUntilNextSpawn < 0);
+            if (spawnPoint.TimeUntilNextSpawn < 0) {
 
-         foreach (var spawnPoint in availableSpawnPoints) {
-            spawnPoint.TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns);
+               spawnPoint.TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns);
 
-            var freeSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxSpawnsPerSpawnPoint).ToList();
-
-            foreach(var point in freeSpawnPoints) {
                int numberOfEnemiesToSpawn = Random.Range(1, maxSpawnCounterPerSpawn);
 
-               var enemies = entitySpawnerService.SpawnEntitiesAroundSource(point.SpawnPointTransform.position, numberOfEnemiesToSpawn, wanderingDistance, point.SpawnPointTransform);
+               var enemies = entitySpawnerService.SpawnEntitiesAroundSource(spawnPoint.SpawnPointTransform, numberOfEnemiesToSpawn, wanderingDistance);
 
-               point.Entities.AddRange(enemies);
-               point.EntitiesSpawned += numberOfEnemiesToSpawn;
+               spawnPoint.Entities.AddRange(enemies);
+               spawnPoint.EntitiesSpawned += numberOfEnemiesToSpawn;
             }
          }
-         }
+      }
    }
 }

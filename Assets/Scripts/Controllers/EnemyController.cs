@@ -27,9 +27,14 @@ namespace Assets.Scripts.Controllers
 
       private void Update()
       {
+         WanderAroundSpawnPoint();
+      }
+
+      private void WanderAroundSpawnPoint()
+      {
          remainingTime -= Time.deltaTime;
 
-         if (remainingTime < 0) {
+         if(remainingTime < 0) {
             Debug.Log($"{transform.name} is moving now");
 
             remainingTime = Random.Range(1, 10);

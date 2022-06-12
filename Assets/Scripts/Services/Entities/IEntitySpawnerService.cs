@@ -6,8 +6,8 @@ namespace Assets.Scripts.Services.Entities
 {
    public interface IEntitySpawnerService
    {
-      Transform SpawnEntity(Transform entity, Vector3 spawnPosition, int wanderingDistance);
-      List<Transform> SpawnEntitiesAroundSource(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource, Transform parent);
+      Transform SpawnEntity(Transform spawnPoint, Vector3 spawnPosition, int wanderingDistance);
+      List<Transform> SpawnEntitiesAroundSource(Transform parent, int numberOfSpawns, int distanceFromSource);
       void DespawnEntity(Transform entity);
    }
 }

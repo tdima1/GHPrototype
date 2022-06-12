@@ -27,9 +27,9 @@ namespace Assets.Scripts.Services.Entities
          this.enemyFactory = enemyFactory;
       }
 
-      public List<Transform> SpawnEntitiesAroundSource(Vector3 spawnPosition, int numberOfSpawns, int wanderingDistance, Transform spawnPoint)
+      public List<Transform> SpawnEntitiesAroundSource(Transform spawnPoint, int numberOfSpawns, int wanderingDistance)
       {
-         var spawnLocations = GenerateRandomSpawnLocations(spawnPosition, numberOfSpawns, wanderingDistance);
+         var spawnLocations = GenerateRandomSpawnLocations(spawnPoint.position, numberOfSpawns, wanderingDistance);
          var enemies = new List<Transform>();
 
          foreach(var location in spawnLocations) {

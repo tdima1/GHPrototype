@@ -56,7 +56,7 @@ namespace Assets.Scripts.Services.Movement
          var unitController = unit.GetComponent<UnitController>();
 
          if(movementCoroutine != null) {
-            unitController.StopCoroutine(movementCoroutine);
+            unitController.StopAllCoroutines();
          }
 
          movementCoroutine = MoveUnitThroughPath(unit, path);
