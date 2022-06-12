@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Factories\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Services\Entities\EnemySpawnerService.cs" />
     <Compile Include="Assets\Scripts\Models\Spawning\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingConstants.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimpleLowPolyNature\Readme.txt" />

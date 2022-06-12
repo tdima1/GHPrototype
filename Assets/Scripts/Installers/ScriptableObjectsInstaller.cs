@@ -9,6 +9,7 @@ public class ScriptableObjectsInstaller : ScriptableObjectInstaller<ScriptableOb
    public RaycastConstants raycastConstants;
    public Directions directions;
    public CollisionConstants playerModelData;
+   public PathfindingConstants pathfindingConstants;
 
    public override void InstallBindings()
    {
@@ -17,5 +18,6 @@ public class ScriptableObjectsInstaller : ScriptableObjectInstaller<ScriptableOb
       Container.BindInterfacesAndSelfTo<RaycastConstants>().FromInstance(raycastConstants).AsSingle();
       Container.BindInterfacesAndSelfTo<Directions>().FromInstance(directions).AsSingle();
       Container.BindInterfacesAndSelfTo<CollisionConstants>().FromInstance(playerModelData).AsSingle();
+      Container.BindInterfacesAndSelfTo<PathfindingConstants>().FromInstance(pathfindingConstants).AsSingle();
    }
 }

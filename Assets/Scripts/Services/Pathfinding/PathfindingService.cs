@@ -1,10 +1,6 @@
 ﻿using Assets.Scripts.Models;
 using Assets.Scripts.Services.Raycast;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Services.Pathfinding
@@ -12,10 +8,11 @@ namespace Assets.Scripts.Services.Pathfinding
    internal class PathfindingService : IPathfindingService
    {
       private readonly IRaycastService raycastService;
+      private readonly PathfindingConstants pathfindingConstants;
 
       private readonly int straightLineCost = 10;
       private readonly int diagonalLineCost = 14;
-      private readonly float NeighbourHeightTolerance = 1.5f;
+      private readonly float NeighbourHeightTolerance = 1.5f; // TODO expose this.
 
       private readonly Vector3Int[] directionsNoDiagonals = new Vector3Int[] {
          new Vector3Int(0,0,1),
@@ -35,9 +32,12 @@ namespace Assets.Scripts.Services.Pathfinding
          new Vector3Int(0,0,-1) + Vector3Int.left,
       };
 
-      public PathfindingService(IRaycastService raycastService)
+      public PathfindingService(
+         IRaycastService raycastService,
+         PathfindingConstants pathfindingConstants)
       {
          this.raycastService = raycastService;
+         this.pathfindingConstants = pathfindingConstants;
       }
 
       public List<Vector3> GetPath(Vector3Int start, Vector3Int destination, Grid<Cell> grid, bool useDiagonals = false)
@@ -185,7 +185,7 @@ namespace Assets.Scripts.Services.Pathfinding
       private bool VerifyNeighbourCellWalkableAndHeightTolerance(Cell currentCell, Cell neighbourCell)
       {
          bool result = false;
-         if(/*TODO: neighbourCell.IsWalkable &&*/ Mathf.Abs(currentCell.Height - neighbourCell.Height) <= NeighbourHeightTolerance) {
+         if(/*TODO: neighbourCell.IsWalkable &&*/ Mathf.Abs(currentCell.Height - neighbourCell.Height) <= pathfindingConstants.NeighbourHeightTolerance) {
             result = true;
          }
 

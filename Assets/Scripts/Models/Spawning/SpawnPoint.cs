@@ -9,5 +9,7 @@ namespace Assets.Scripts.Models.Spawning
 
       public int EntitiesSpawned;
       public List<Transform> Entities;
+
+      public float TimeUntilNextSpawn = 10f;
    }
 }

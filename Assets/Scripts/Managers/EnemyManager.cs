@@ -19,7 +19,11 @@ namespace Assets.Scripts.Managers
 
       [SerializeField] [Range(1, 20)] private int maxSpawnsPerMap;
       [SerializeField][Range(1,10)] private int maxSpawnsPerSpawnPoint;
-      [SerializeField] [Range(1, 3)] private int maxSpawnsPerSpawn;
+      [SerializeField] [Range(1, 3)] private int maxSpawnCounterPerSpawn;
+
+      [SerializeField] [Range(1, 10)] private int spawnPointMinTimeBetweenSpawns;
+      [SerializeField] [Range(1, 30)] private int spawnPointMaxTimeBetweenSpawns;
+
       [SerializeField] [Range(1, 10)] private int wanderingDistance;
 
       private List<SpawnPoint> spawnPoints;
@@ -38,35 +42,30 @@ namespace Assets.Scripts.Managers
 
             spawnPoints.Add(spawnPoint);
          }
-
-         //foreach(var spawnPoint in spawnPointsPrefabs) {
-         //   var enemyBatch = entitySpawnerService.SpawnEntitiesAroundSource(spawnPoint.position, Random.Range(1, maxSpawnsPerSpawnPoint), initialDistanceFromSource, enemyParent);
-
-         //   foreach(var enemy in enemyBatch) {
-         //      enemy.GetComponent<EnemyController>().SpawnPoint = spawnPoint;
-         //   }
-
-         //   enemies.AddRange(enemyBatch);
-         //}
       }
 
       private void Update()
       {
-         if (spawnPoints.Select(s => s.EntitiesSpawned).Sum() <= maxSpawnsPerMap) {
-
-            var availableSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxSpawnsPerSpawnPoint).ToList();
-
-            foreach(var spawnPoint in availableSpawnPoints) {
-               int numberOfEnemiesSpawned = Random.Range(1, maxSpawnsPerSpawn);
-
-               var enemies = entitySpawnerService.SpawnEntitiesAroundSource(spawnPoint.SpawnPointTransform.position, numberOfEnemiesSpawned, wanderingDistance, spawnPoint.SpawnPointTransform);
-               
-               spawnPoint.Entities.AddRange(enemies);
-               spawnPoint.EntitiesSpawned += numberOfEnemiesSpawned;
-            }
-
-
+         foreach (var spawnPoint in spawnPoints) {
+            spawnPoint.TimeUntilNextSpawn -= Time.deltaTime;
          }
-      }
+
+         var availableSpawnPoints = spawnPoints.Where(s => s.TimeUntilNextSpawn < 0);
+
+         foreach (var spawnPoint in availableSpawnPoints) {
+            spawnPoint.TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns);
+
+            var freeSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxSpawnsPerSpawnPoint).ToList();
+
+            foreach(var point in freeSpawnPoints) {
+               int numberOfEnemiesToSpawn = Random.Range(1, maxSpawnCounterPerSpawn);
+
+               var enemies = entitySpawnerService.SpawnEntitiesAroundSource(point.SpawnPointTransform.position, numberOfEnemiesToSpawn, wanderingDistance, point.SpawnPointTransform);
+
+               point.Entities.AddRange(enemies);
+               point.EntitiesSpawned += numberOfEnemiesToSpawn;
+            }
+         }
+         }
    }
 }

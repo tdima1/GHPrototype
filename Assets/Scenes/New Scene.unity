@@ -1359,9 +1359,11 @@ MonoBehaviour:
   - {fileID: 1553511149}
   - {fileID: 604020336}
   - {fileID: 484759224}
-  maxSpawnsPerMap: 8
-  maxSpawnsPerSpawnPoint: 4
-  maxSpawnsPerSpawn: 2
+  maxSpawnsPerMap: 20
+  maxSpawnsPerSpawnPoint: 7
+  maxSpawnCounterPerSpawn: 3
+  spawnPointMinTimeBetweenSpawns: 10
+  spawnPointMaxTimeBetweenSpawns: 30
   wanderingDistance: 10
 --- !u!1 &636171471
 GameObject:
@@ -3112,7 +3114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6527680571448237196, guid: 7fbfc5affc905354e840414b53968417, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.2390873
+      value: 2.2327354
       objectReference: {fileID: 0}
     - target: {fileID: 6527680571448237196, guid: 7fbfc5affc905354e840414b53968417, type: 3}
       propertyPath: m_LocalScale.z
