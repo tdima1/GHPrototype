@@ -17,7 +17,7 @@ public class FrameworkInstaller : MonoInstaller
       Container.Bind<IMovementService>().To<MovementService>().AsSingle();
       Container.Bind<IGridBuilderService>().To<GridBuilderService>().AsSingle();
       Container.Bind<IPathfindingService>().To<PathfindingService>().AsSingle();
-      Container.Bind<IEntitySpawnerService>().To<EntitySpawnerService>().AsSingle();
+      Container.Bind<IEntitySpawnerService>().To<EnemySpawnerService>().AsSingle();
 
 
       Container.BindFactory<IMovementService, EnemyController, EnemyFactory>().FromComponentInNewPrefab(enemyPrefab);

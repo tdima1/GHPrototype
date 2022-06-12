@@ -2,7 +2,6 @@
 using Assets.Scripts.Factories;
 using Assets.Scripts.Services.Movement;
 using Assets.Scripts.Services.Raycast;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +11,13 @@ using Zenject;
 
 namespace Assets.Scripts.Services.Entities
 {
-   internal class EntitySpawnerService : IEntitySpawnerService
+   internal class EnemySpawnerService : IEntitySpawnerService
    {
       private readonly IRaycastService raycastService;
       private readonly IMovementService movementService;
       private readonly EnemyFactory enemyFactory;
 
-      public EntitySpawnerService(
+      public EnemySpawnerService(
          IRaycastService raycastService,
          IMovementService movementService,
          EnemyFactory enemyFactory)
@@ -28,20 +27,20 @@ namespace Assets.Scripts.Services.Entities
          this.enemyFactory = enemyFactory;
       }
 
-      public List<Transform> SpawnSingularEntitiesAroundSource(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource, Transform entity, Transform parent)
+      public List<Transform> SpawnEntitiesAroundSource(Vector3 sourcePosition, int numberOfSpawns, int distanceFromSource, Transform parent)
       {
          var spawnLocations = GenerateRandomSpawnLocations(sourcePosition, numberOfSpawns, distanceFromSource);
          var enemies = new List<Transform>();
 
          foreach(var location in spawnLocations) {
-            var enemy = SpawnEntity(entity, parent, location);
+            var enemy = SpawnEntity(parent, location);
             enemies.Add(enemy);
          }
 
          return enemies;
       }
 
-      public Transform SpawnEntity(Transform entity, Transform parent, Vector3 spawnPoint)
+      public Transform SpawnEntity(Transform parent, Vector3 spawnPoint)
       {
          var enemy = enemyFactory.Create(movementService);
 
@@ -60,8 +59,8 @@ namespace Assets.Scripts.Services.Entities
          var spawnLocations = new List<Vector3>();
 
          for(int i = 0; i < numberOfSpawns; i++) {
-            var randX = UnityEngine.Random.Range(sourcePosition.x - distanceFromSource, sourcePosition.x + distanceFromSource);
-            var randZ = UnityEngine.Random.Range(sourcePosition.z - distanceFromSource, sourcePosition.z + distanceFromSource);
+            var randX = Random.Range(sourcePosition.x - distanceFromSource, sourcePosition.x + distanceFromSource);
+            var randZ = Random.Range(sourcePosition.z - distanceFromSource, sourcePosition.z + distanceFromSource);
 
             var groundHit = raycastService.GetGroundPoint(new Vector3(randX, 0, randZ));
 

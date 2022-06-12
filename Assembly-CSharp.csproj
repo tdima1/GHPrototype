@@ -72,7 +72,6 @@
     <Compile Include="Assets\Scripts\Controllers\UnitController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PathfindingLayers.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\RaycastService.cs" />
-    <Compile Include="Assets\Scripts\Services\Entities\EntitySpawnerService.cs" />
     <Compile Include="Assets\Scripts\Services\Raycast\IRaycastService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\Directions.cs" />
     <Compile Include="Assets\Scripts\Controllers\EnemyController.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Assets\Scripts\Services\Entities\IEntitySpawnerService.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\GridBuilderData.cs" />
     <Compile Include="Assets\Scripts\Factories\EnemyFactory.cs" />
+    <Compile Include="Assets\Scripts\Services\Entities\EnemySpawnerService.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\SimpleLowPolyNature\Readme.txt" />

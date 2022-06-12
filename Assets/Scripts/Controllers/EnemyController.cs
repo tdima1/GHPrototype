@@ -11,8 +11,7 @@ namespace Assets.Scripts.Controllers
 
       private IMovementService movementService;
 
-      private float timeSinceLastWandering = 0f;
-      private float timeUntilNextWandering = 0f;
+      private float remainingTime;
 
       [Inject]
       public void Construct(IMovementService movementService)
@@ -22,20 +21,17 @@ namespace Assets.Scripts.Controllers
 
       private void Start()
       {
-         
+         remainingTime = Random.Range(3, 10);
       }
 
-      private void FixedUpdate()
+      private void Update()
       {
-         timeSinceLastWandering += Time.deltaTime;
+         remainingTime -= Time.deltaTime;
 
-         if (timeSinceLastWandering > timeUntilNextWandering) {
+         if (remainingTime < 0) {
             Debug.Log($"{transform.name} is moving now");
 
-            timeSinceLastWandering = Time.time;
-            timeUntilNextWandering = Random.Range(5000, 10000);
-
-
+            remainingTime = Random.Range(1, 10);
 
             movementService.MoveUnit(transform, Vector3.zero);
          }

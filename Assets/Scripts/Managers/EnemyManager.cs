@@ -13,10 +13,9 @@ namespace Assets.Scripts.Managers
       [Inject] private readonly IEntitySpawnerService entitySpawnerService;
 
       [SerializeField] private Transform enemyParent;
-      [SerializeField] private Transform enemyPrefab;
       [SerializeField] private List<Transform> spawnPoints;
 
-      [SerializeField][Range(0,10)] private int initialSpawns;
+      [SerializeField][Range(0,10)] private int numberOfSpawns;
       [SerializeField] [Range(1, 7)] private int initialDistanceFromSource;
       [SerializeField] [Range(1, 5)] private int maxEnemiesPerSpawn;
 
@@ -27,16 +26,14 @@ namespace Assets.Scripts.Managers
 
       private void Start()
       {
-         var i = 0;
          foreach(var spawnPoint in spawnPoints) {
-            i++;
-            var enemiesa = entitySpawnerService.SpawnSingularEntitiesAroundSource(spawnPoint.position, initialSpawns, initialDistanceFromSource, enemyPrefab, enemyParent);
+            var enemyBatch = entitySpawnerService.SpawnEntitiesAroundSource(spawnPoint.position, numberOfSpawns, initialDistanceFromSource, enemyParent);
 
-            foreach(var enemy in enemiesa) {
+            foreach(var enemy in enemyBatch) {
                enemy.GetComponent<EnemyController>().SpawnPoint = spawnPoint;
             }
 
-            enemies.AddRange(enemiesa);
+            enemies.AddRange(enemyBatch);
          }
       }
 
