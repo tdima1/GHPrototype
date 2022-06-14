@@ -17,11 +17,11 @@ namespace Assets.Scripts.Managers
       [SerializeField] private Transform enemyParent;
       [SerializeField] private List<Transform> spawnPointsPrefabs;
 
-      [SerializeField][Range(1,10)] private int maxEnemiesPerSpawnPoint;
+      [SerializeField][Range(1,100)] private int maxEnemiesPerSpawnPoint;
       [SerializeField] [Range(1, 3)] private int maxEnemiesSpawnedAtOnce;
 
-      [SerializeField] [Range(1, 10)] private int spawnPointMinTimeBetweenSpawns;
-      [SerializeField] [Range(1, 30)] private int spawnPointMaxTimeBetweenSpawns;
+      [SerializeField] [Range(1, 10)] private int minTimeBetweenSpawns;
+      [SerializeField] [Range(1, 30)] private int maxTimeBetweenSpawns;
 
       [SerializeField] [Range(1, 10)] private int wanderingDistance;
 
@@ -29,30 +29,40 @@ namespace Assets.Scripts.Managers
 
       private void Start()
       {
+         InitializeSpawnPoints();
+      }
+
+      private void Update()
+      {
+         SpawnEnemies();
+      }
+
+      private void InitializeSpawnPoints()
+      {
          spawnPoints = new List<SpawnPoint>();
 
-         foreach (var prefab in spawnPointsPrefabs) {
+         foreach(var prefab in spawnPointsPrefabs) {
             var spawnPoint = new SpawnPoint() {
                Entities = new List<Transform>(),
                EntitiesSpawned = 0,
                SpawnPointTransform = prefab,
-               TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns),
-         };
+               TimeUntilNextSpawn = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns),
+            };
 
             spawnPoints.Add(spawnPoint);
          }
       }
 
-      private void Update()
+      private void SpawnEnemies()
       {
          var availableSpawnPoints = spawnPoints.Where(s => s.EntitiesSpawned < maxEnemiesPerSpawnPoint).ToList();
 
          foreach(var spawnPoint in availableSpawnPoints) {
             spawnPoint.TimeUntilNextSpawn -= Time.deltaTime;
 
-            if (spawnPoint.TimeUntilNextSpawn < 0) {
+            if(spawnPoint.TimeUntilNextSpawn < 0) {
 
-               spawnPoint.TimeUntilNextSpawn = Random.Range(spawnPointMinTimeBetweenSpawns, spawnPointMaxTimeBetweenSpawns);
+               spawnPoint.TimeUntilNextSpawn = Random.Range(minTimeBetweenSpawns, maxTimeBetweenSpawns);
 
                int numberOfEnemiesToSpawn = Random.Range(1, maxEnemiesSpawnedAtOnce);
 

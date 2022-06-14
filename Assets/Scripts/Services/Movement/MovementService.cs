@@ -36,7 +36,7 @@ namespace Assets.Scripts.Services.Movement
          if (path != null) {
             MoveUnit(unit, path);
 
-            Debug_PlacePathCells(path);
+            //Debug_PlacePathCells(path);
          }
       }
 

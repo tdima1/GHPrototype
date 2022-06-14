@@ -10,6 +10,9 @@ namespace Assets.Scripts.Controllers
       public Transform SpawnPoint;
       public int WanderingDistance;
 
+      public int minTimeWandering;
+      public int maxTimeWandering;
+
       private IMovementService movementService;
 
       private float remainingTime;
@@ -22,7 +25,7 @@ namespace Assets.Scripts.Controllers
 
       private void Start()
       {
-         remainingTime = Random.Range(3, 10);
+         remainingTime = Random.Range(minTimeWandering, maxTimeWandering);
       }
 
       private void Update()
@@ -35,9 +38,8 @@ namespace Assets.Scripts.Controllers
          remainingTime -= Time.deltaTime;
 
          if(remainingTime < 0) {
-            Debug.Log($"{transform.name} is moving now");
 
-            remainingTime = Random.Range(1, 10);
+            remainingTime = Random.Range(minTimeWandering, maxTimeWandering);
 
             var detination = new Vector3(
                SpawnPoint.position.x + Random.Range(-WanderingDistance, WanderingDistance),

@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
    [SerializeField] private float movementTime;
    [SerializeField] private float zoomAmount;
    [SerializeField] private float rotateAmount;
+   [SerializeField] private float minZoom;
+   [SerializeField] private float maxZoom;
    [SerializeField][Range(0, 11.003f)] private float smoothSpeed;
    public Vector3 cameraOffset;
 
@@ -35,6 +37,9 @@ public class CameraController : MonoBehaviour
       HandleCameraMovement();
       HandleCameraRotation();
       newZoom += HandleCameraZoom();
+
+      var clampedZoom = Mathf.Clamp(newZoom.y, minZoom, maxZoom);
+      newZoom = new Vector3(0, clampedZoom, -clampedZoom);
 
       transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
       cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);

@@ -44,6 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a7d98c445a70e47be47468ca0ddae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnPoint: {fileID: 0}
+  WanderingDistance: 5
+  minTimeWandering: 3
+  maxTimeWandering: 30
 --- !u!1 &2983571470567122394
 GameObject:
   m_ObjectHideFlags: 0
